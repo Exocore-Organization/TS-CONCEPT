@@ -1,7 +1,3 @@
-<div align="center">
-
-<img src="exocore-web/static-pages/exo-icon.png" alt="Exocore" width="96"/>
-
 # Exocore
 
 **Self-hosted multi-project developer panel — your global IDE, your server, your rules.**
@@ -233,6 +229,7 @@ Pull requests are welcome. For major changes, open an issue first.
 | Kiff Hyacinth Pon | Core |
 | Cyril Encenso | Core |
 | Francis Loyd M. Raval  | Core |
+| Marjhun O. Baylon  | Core |
 
 ---
 
