@@ -13,7 +13,7 @@ set -euo pipefail
 EXOCORE_DIR="${EXOCORE_DIR:-$HOME/.exocore}"
 EXOCORE_PORT="${PORT:-5000}"
 NODE_MIN=18
-REPO_URL="${REPO_URL:-https://github.com/your-org/exocore}"
+REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web}"
 BRANCH="${BRANCH:-main}"
 
 # ── color helpers ────────────────────────────────────────────────────────────
