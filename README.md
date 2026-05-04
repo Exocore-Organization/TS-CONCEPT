@@ -8,7 +8,7 @@
 
 [![Version](https://img.shields.io/badge/version-v5.0.0-yellow?style=flat-square)](https://github.com/Exocore-Organization/exocore-web)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D18-green?style=flat-square)](https://nodejs.org)
+[![Node](https://img.shields.io/badge/node-%3E%3D24-green?style=flat-square)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-lightgrey?style=flat-square)](#installation)
 
