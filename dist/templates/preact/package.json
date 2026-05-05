@@ -1,8 +1,0 @@
-{
-  "name": "preact-app",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": { "start": "echo 'configure your start script'" },
-  "dependencies": {},
-  "devDependencies": {}
-}

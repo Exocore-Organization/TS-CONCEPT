@@ -1,6 +1,0 @@
-{
-  "name": "exocore-fastify",
-  "version": "1.0.0",
-  "scripts": { "start": "node index.js" },
-  "dependencies": { "fastify": "^4.21.0" }
-}

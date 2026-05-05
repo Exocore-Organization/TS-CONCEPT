@@ -1,1 +1,0 @@
-(function(){if(!window['ExoExt'])return;window['ExoExt']['register']('minecraft',{'activate'(a){return;},'deactivate'(){const a=document['querySelector']('.minecraft-root');if(a)a['remove']();const b=document['getElementById']('minecraft-style');if(b)b['remove']();}});}());
