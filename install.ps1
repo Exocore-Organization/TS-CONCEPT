@@ -1,136 +1,198 @@
-[CmdletBinding()]
-param(
-    [ValidateSet('all', 'start', 'update', 'doctor', 'uninstall', 'exit')]
-    [string]$Command = 'all',
-    [string]$TargetDir = "exocore-web"
-)
+#!/usr/bin/env bash
+# ════════════════════════════════════════════════════════════════════════════
+#  Exocore — Linux install script
+#  Supports: Ubuntu 20.04+, Debian 11+, Fedora 36+, Arch, openSUSE
+#
+#  Usage:
+#    curl -fsSL https://raw.githubusercontent.com/your-org/exocore/main/linux.sh | bash
+#  or locally:
+#    chmod +x linux.sh && ./linux.sh
+# ════════════════════════════════════════════════════════════════════════════
+set -euo pipefail
 
-$RepoUrl = "https://github.com/Exocore-Organization/exocore-web.git"
-$Branch = "main"
-$ESC = [char]27
-$C = @{ R="$ESC[0m"; G="$ESC[32m"; Y="$ESC[33m"; C="$ESC[36m"; Rd="$ESC[31m"; B="$ESC[1m" }
+EXOCORE_DIR="${EXOCORE_DIR:-$HOME/.exocore}"
+EXOCORE_PORT="${PORT:-5000}"
+NODE_MIN=18
+REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web}"
+BRANCH="${BRANCH:-main}"
 
-function Write-Banner {
-    Write-Host @"
-$($C.C)$($C.B)  ███████╗██╗  ██╗ ██████╗  ██████╗ ██████╗ ███████╗$($C.R)
-$($C.C)$($C.B)  ██╔════╝╚██╗██╔╝██╔═══██╗██╔════╝██╔═══██╗██╔════╝$($C.R)
-$($C.C)$($C.B)  █████╗   ╚███╔╝ ██║   ██║██║     ██║   ██║██████╔╝$($C.R)
-$($C.C)$($C.B)  ██╔══╝   ██╔██╗ ██║   ██║██║     ██║   ██║██╔══██╗$($C.R)
-$($C.C)$($C.B)  ███████╗██╔╝ ██╗╚██████╔╝╚██████╗╚██████╔╝██║  ██║$($C.R)
-$($C.C)$($C.B)  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝  ╚═╝$($C.R)
-$($C.B)  Browser-based IDE  •  Installer$($C.R)
-"@
+# ── color helpers ────────────────────────────────────────────────────────────
+RED='\033[0;31m'; GRN='\033[0;32m'; YEL='\033[1;33m'
+CYN='\033[0;36m'; BOLD='\033[1m'; RST='\033[0m'
+info()  { echo -e "${CYN}[exocore]${RST} $*"; }
+ok()    { echo -e "${GRN}[  ok  ]${RST} $*"; }
+warn()  { echo -e "${YEL}[ warn ]${RST} $*"; }
+die()   { echo -e "${RED}[ fail ]${RST} $*" >&2; exit 1; }
+
+banner() {
+    echo -e "${BOLD}${CYN}"
+    echo "  ███████╗██╗  ██╗ ██████╗  ██████╗ ██████╗ ██████╗ ███████╗"
+    echo "  ██╔════╝╚██╗██╔╝██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██╔════╝"
+    echo "  █████╗   ╚███╔╝ ██║   ██║██║     ██║   ██║██████╔╝█████╗  "
+    echo "  ██╔══╝   ██╔██╗ ██║   ██║██║     ██║   ██║██╔══██╗██╔══╝  "
+    echo "  ███████╗██╔╝ ██╗╚██████╔╝╚██████╗╚██████╔╝██║  ██║███████╗"
+    echo "  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝"
+    echo -e "${RST}${BOLD}  Browser-based IDE  •  Linux Installer${RST}"
+    echo ""
 }
 
-function Log($m) { Write-Host "${C.C}[exocore]${C.R} $m" }
-function Ok($m)  { Write-Host "${C.G}[  ok  ]${C.R} $m" }
-function Warn($m){ Write-Host "${C.Y}[ warn ]${C.R} $m" }
-function Err($m) { Write-Host "${C.Rd}[error ]${C.R} $m" -ForegroundColor Red }
-
-function Ensure-Cmd($name, $id) {
-    if (Get-Command $name -ErrorAction SilentlyContinue) { Ok "$name installed"; return $true }
-    Warn "$name not found, installing via winget..."
-    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) { Err "winget missing"; return $false }
-    $p = Start-Process winget -Wait -PassThru -NoNewWindow -ArgumentList "install","--id",$id,"--silent","--accept-source-agreements","--accept-package-agreements"
-    if ($p.ExitCode -notin 0,1641,3010) { Err "Failed to install $name"; return $false }
-    $env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [Environment]::GetEnvironmentVariable("Path","User")
-    Ok "$name installed"; return $true
+# ── detect package manager ───────────────────────────────────────────────────
+detect_pkg() {
+    if   command -v apt-get &>/dev/null; then echo "apt";
+    elif command -v dnf     &>/dev/null; then echo "dnf";
+    elif command -v pacman  &>/dev/null; then echo "pacman";
+    elif command -v zypper  &>/dev/null; then echo "zypper";
+    else echo "unknown"; fi
 }
 
-function Check-Node { if (-not (Ensure-Cmd node "OpenJS.NodeJS.LTS")) { return $false }; Ok "Node.js $(node -v)"; $true }
-function Check-Git  { if (-not (Ensure-Cmd git "Git.Git")) { return $false }; Ok "$(git --version)"; $true }
-
-function Fetch-Repo {
-    if (Test-Path (Join-Path $TargetDir ".git")) {
-        Log "Updating at $TargetDir..."
-        Push-Location $TargetDir; git pull --ff-only origin $Branch; $r=$?; Pop-Location
-        if (-not $r) { Warn "Pull had warnings" }
-    } else {
-        Log "Cloning to $TargetDir..."
-        git clone --depth=1 --branch $Branch $RepoUrl $TargetDir
-        if (-not $?) { Err "Clone failed"; return $false }
-    }
-    Ok "Source ready at $TargetDir"; $true
+install_pkg() {
+    local pm; pm=$(detect_pkg)
+    case $pm in
+        apt)    sudo apt-get update -qq && sudo apt-get install -y "$@" ;;
+        dnf)    sudo dnf install -y "$@" ;;
+        pacman) sudo pacman -Sy --noconfirm "$@" ;;
+        zypper) sudo zypper install -y "$@" ;;
+        *)      die "Unsupported package manager. Install manually: $*" ;;
+    esac
 }
 
-function Install-Deps {
-    Log "Installing npm dependencies..."
-    Push-Location $TargetDir
-    $env:PUPPETEER_SKIP_DOWNLOAD="1"
-    npm install --omit=dev --legacy-peer-deps --no-audit --no-fund
-    $r=$?; Pop-Location
-    if (-not $r) { Err "npm install failed"; return $false }
-    Ok "Dependencies installed"; $true
+# ── check Node.js ────────────────────────────────────────────────────────────
+check_node() {
+    if ! command -v node &>/dev/null; then
+        warn "Node.js not found. Installing via NodeSource..."
+        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - 2>/dev/null || \
+            install_pkg nodejs || die "Failed to install Node.js"
+    fi
+    local ver
+    ver=$(node -e "process.stdout.write(String(process.version.match(/\d+/)[0]))")
+    if (( ver < NODE_MIN )); then
+        die "Node.js ${NODE_MIN}+ required (found v${ver}). Update via: https://nodejs.org"
+    fi
+    ok "Node.js $(node --version)"
 }
 
-function Start-Server {
-    Log "Starting Exocore with npm start..."
-    Write-Host "`n  ${C.G}Server starting...${C.R}`n"
-    $env:PUPPETEER_SKIP_DOWNLOAD="1"
-    Set-Location $TargetDir
-    npm start
+# ── check Git ────────────────────────────────────────────────────────────────
+check_git() {
+    if ! command -v git &>/dev/null; then
+        info "Installing git..."
+        install_pkg git
+    fi
+    ok "git $(git --version | awk '{print $3}')"
 }
 
-function Show-Doctor {
-    Write-Host ""; Log "TARGET_DIR: $TargetDir"
-    if (Get-Command node -ErrorAction SilentlyContinue) { Log "node: $(node -v)" } else { Warn "node not found" }
-    if (Get-Command npm -ErrorAction SilentlyContinue) { Log "npm: $(npm -v)" } else { Warn "npm not found" }
-    if (Get-Command git -ErrorAction SilentlyContinue) { Log "git: $(git --version)" } else { Warn "git not found" }
-    if (Test-Path (Join-Path $TargetDir "package.json")) { Ok "package.json found" } else { Warn "package.json missing" }
-    Write-Host ""
+# ── clone or update ──────────────────────────────────────────────────────────
+fetch_repo() {
+    if [[ -d "$EXOCORE_DIR/.git" ]]; then
+        info "Updating existing installation at $EXOCORE_DIR..."
+        git -C "$EXOCORE_DIR" pull --ff-only origin "$BRANCH"
+    else
+        info "Cloning Exocore to $EXOCORE_DIR..."
+        git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$EXOCORE_DIR"
+    fi
+    ok "Source at $EXOCORE_DIR"
 }
 
-function Show-Finish {
-    $absDir = (Get-Item $TargetDir).FullName
-    Write-Host @"
-$($C.G)$($C.B)╔══════════════════════════════════════════════╗$($C.R)
-$($C.G)$($C.B)║      Exocore installed successfully!         ║$($C.R)
-$($C.G)$($C.B)╚══════════════════════════════════════════════╝$($C.R)
-
-  Start:   cd $absDir && npm start
-"@
+# ── install dependencies ─────────────────────────────────────────────────────
+install_deps() {
+    info "Installing npm dependencies (this may take a minute)..."
+    cd "$EXOCORE_DIR"
+    PUPPETEER_SKIP_DOWNLOAD=1 npm install \
+        --omit=dev --legacy-peer-deps --no-audit --no-fund \
+        2>/dev/null \
+        || npm install --omit=dev --legacy-peer-deps --no-audit --no-fund
+    ok "Dependencies installed"
 }
 
-function Do-Uninstall {
-    Warn "This will remove '$TargetDir' and all its contents."
-    $confirm = Read-Host "Type 'yes' to confirm"
-    if ($confirm -ne 'yes') { Log "Uninstall cancelled"; return }
-    if (Test-Path $TargetDir) {
-        Log "Removing $TargetDir..."
-        Remove-Item -Recurse -Force $TargetDir -ErrorAction SilentlyContinue
-        if (Test-Path $TargetDir) { Warn "Some files may be locked. Delete manually if needed." }
-        else { Ok "Uninstalled" }
-    } else { Warn "$TargetDir not found" }
+# ── create devs.json ─────────────────────────────────────────────────────────
+create_devs_json() {
+    local devs_file="$EXOCORE_DIR/devs.json"
+    if [[ ! -f "$devs_file" ]]; then
+        info "Creating devs.json..."
+        # Pwede mong baguhin ang default content dito kung may specific kang format
+        cat > "$devs_file" <<EOF
+{
+  "developers": []
+}
+EOF
+        ok "Created devs.json at ./devs.json"
+    else
+        info "devs.json already exists, skipping."
+    fi
 }
 
-function Install-Exocore {
-    param([ValidateSet('all','start','update','doctor','uninstall','exit')][string]$Command = 'all')
-    Write-Banner
-    switch ($Command) {
-        'exit'      { Log "Exiting"; return }
-        'doctor'    { Show-Doctor }
-        'uninstall' { Do-Uninstall }
-        'start' {
-            if (-not (Check-Node)) { return }
-            if (-not (Test-Path (Join-Path $TargetDir "package.json"))) { Warn "package.json not found. Run 'all' or 'update' first."; return }
-            Start-Server
-        }
-        'update' {
-            if (-not (Check-Git)) { return }
-            if (-not (Fetch-Repo)) { return }
-            Start-Server
-        }
-        'all' {
-            if (-not (Check-Git)) { return }
-            if (-not (Check-Node)) { return }
-            if (-not (Fetch-Repo)) { return }
-            if (-not (Install-Deps)) { return }
-            Show-Finish
-            Start-Server
-        }
-    }
+# ── create systemd service (optional) ───────────────────────────────────────
+create_service() {
+    if ! command -v systemctl &>/dev/null; then return; fi
+    read -r -p "$(echo -e "${YEL}Install as systemd service? [y/N]${RST} ")" ans
+    [[ "$ans" =~ ^[Yy]$ ]] || return
+    local svc_file="/etc/systemd/system/exocore.service"
+    sudo tee "$svc_file" >/dev/null <<EOF
+[Unit]
+Description=Exocore Browser IDE
+After=network.target
+
+[Service]
+Type=simple
+User=$USER
+WorkingDirectory=$EXOCORE_DIR
+ExecStart=$(command -v node) dist/index.js
+Restart=on-failure
+RestartSec=5s
+Environment=PORT=$EXOCORE_PORT
+Environment=NODE_ENV=production
+Environment=PUPPETEER_SKIP_DOWNLOAD=1
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    sudo systemctl daemon-reload
+    sudo systemctl enable exocore
+    sudo systemctl start  exocore
+    ok "Service installed: sudo systemctl {start,stop,restart,status} exocore"
 }
 
-if ($MyInvocation.ScriptName -eq '' -or $MyInvocation.InvocationName -eq '.') {
-    Install-Exocore -Command $Command
+# ── create launcher script ───────────────────────────────────────────────────
+create_launcher() {
+    local bin="$HOME/.local/bin/exocore-ide"
+    mkdir -p "$HOME/.local/bin"
+    cat > "$bin" <<EOF
+#!/usr/bin/env bash
+cd "$EXOCORE_DIR"
+export PORT="${EXOCORE_PORT}"
+export NODE_ENV=production
+export PUPPETEER_SKIP_DOWNLOAD=1
+exec node dist/index.js "\$@"
+EOF
+    chmod +x "$bin"
+    ok "Launcher: $bin"
+    if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+        warn "Add to your shell rc: export PATH=\"\$HOME/.local/bin:\$PATH\""
+    fi
 }
+
+# ── print finish banner ──────────────────────────────────────────────────────
+finish() {
+    echo ""
+    echo -e "${GRN}${BOLD}╔══════════════════════════════════════════════╗${RST}"
+    echo -e "${GRN}${BOLD}║      Exocore installed successfully!         ║${RST}"
+    echo -e "${GRN}${BOLD}╚══════════════════════════════════════════════╝${RST}"
+    echo ""
+    echo -e "  Start:     ${BOLD}exocore-ide${RST}"
+    echo -e "  Open:      ${CYN}http://localhost:${EXOCORE_PORT}/exocore${RST}"
+    echo ""
+}
+
+# ── main ─────────────────────────────────────────────────────────────────────
+main() {
+    banner
+    check_git
+    check_node
+    fetch_repo
+    install_deps
+    create_devs_json
+    create_launcher
+    create_service
+    finish
+}
+
+main "$@"
