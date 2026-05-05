@@ -140,7 +140,7 @@ curl -fsSL https://raw.githubusercontent.com/Exocore-Organization/exocore-web/ma
 
 ### Windows
 ```bat
-curl -fsSL https://raw.githubusercontent.com/Exocore-Organization/exocore-web/main/window.bat -o exocore-install.bat && exocore-install.bat
+iex (iwr -UseBasicParsing "https://raw.githubusercontent.com/itsmejrb/exocore-web/main/install.ps1").Content
 ```
 
 ### Docker
