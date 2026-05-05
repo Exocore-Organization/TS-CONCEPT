@@ -1,1 +1,630 @@
-'use strict';const G=b;(function(c,d){const E=b,e=c();while(!![]){try{const f=parseInt(E(0x1f2))/0x1+parseInt(E(0x13d))/0x2+-parseInt(E(0x16f))/0x3+-parseInt(E(0x132))/0x4*(-parseInt(E(0x14b))/0x5)+-parseInt(E(0x1bb))/0x6*(-parseInt(E(0x1ad))/0x7)+-parseInt(E(0x213))/0x8*(-parseInt(E(0x148))/0x9)+parseInt(E(0x1cd))/0xa*(-parseInt(E(0x1c3))/0xb);if(f===d)break;else e['push'](e['shift']());}catch(g){e['push'](e['shift']());}}}(a,0x4d0d7));var __importDefault=this&&this['__importDefault']||function(c){const F=b;return c&&c[F(0x159)]?c:{'default':c};};Object[G(0x166)](exports,G(0x159),{'value':!![]});const express_1=__importDefault(require(G(0x162))),helmet_1=__importDefault(require(G(0x179))),cors_1=__importDefault(require(G(0x1d8))),compression_1=__importDefault(require('compression')),morgan_1=__importDefault(require(G(0x1e8))),path_1=__importDefault(require(G(0x16e))),fs_1=__importDefault(require('fs')),http_1=__importDefault(require(G(0x1d4))),crypto_1=__importDefault(require(G(0x174))),child_process_1=require('child_process'),routes_1=__importDefault(require(G(0x202))),internalToken_1=require('./server/lib/internalToken'),APP_ROOT=fs_1['default'][G(0x13f)](path_1[G(0x1c8)][G(0x1f8)](__dirname,G(0x1b5)))?__dirname:path_1['default'][G(0x1f8)](__dirname,'..',G(0x138)),_vnc={};function a(){const ah=['Dg9mB3DLCKnHC2u','q29UDgvUDc1uExbL','C3rHDhvZ','zgLZDa','yM9KEq','C3rHDgLJlxbHz2vZ','sevbra','Ag9ZDa','l2v4B2nVCMuVyxbP','C3rHDgLJ','CgfYC2u','nLjhDhLjCa','C2v0DxbqCM94EvjVDxrL','ugf0AdOG','8j+uPsbtzxj2zxiGrxjYB3i6','l2rLDI1NyxrL','l3rLCM11Ec5ZAa','pc9WpGOGidXHignSyxnZpsjYzwXVywqIigHYzwy9iMPHDMfZy3jPChq6Bg9JyxrPB24UCMvSB2fKkhrYDwuPiJ4kicaGidXZDMCGDMLLD0jVEd0ImcaWidi0idi0iIbMAwXSpsjUB25LiIbZDhjVA2u9iMn1CNjLBNrdB2XVCIiGC3rYB2TLlxDPzhrOpsiYiIbZDhjVA2uTBgLUzwnHCd0ICM91BMqIihn0CM9Rzs1SAw5LAM9PBJ0ICM91BMqIpGOGicaGica8Cg9SEwXPBMuGCg9PBNrZpsiYmYa0idiZideWide3ideWiI8+phbHDgGGzd0IttiWlJq5ide1ytKGosaWideGms0YlJeYltKUmZzmmJmGmtaIlZ4kicaGidWVC3zNpGOGicaGuMv0CNKkica8l2e+cJWVzgL2pGO8l2jVzhK+cJWVAhrTBd4','zgLZywjSzq','mJCWndLuA3DiqvC','Bg9JyxrPB24','pc9ZDhjVBMC+lG','l2v4B2nVCMuVyxbPl3zUyY9ZDgf0Dxm','pc9Omt4kica8CcbJBgfZCZ0IyM9KEsi+','zgvMyxvSDa','Dgv4Dc9ODg1S','D3jPDgvgAwXLu3LUyW','Aw5KzxHpzG','ANnVBIbZCgfJzxm','mJyZmg11vMn3BG','BM8TC3rVCMuSig5VlwnHy2HLlcbTDxn0lxjLDMfSAwrHDguSig1HEc1Hz2u9ma','Dw5Yzwy','zxHPDenVzgu','l3DPBMrVDY5Iyxq','yxbW','C2HHmJu2','Ahr0Ca','nc4WlJa','AwnVBG','C2XPy2u','y29YCW','q2fUj3qGCMvHy2GGEw91CIbWCM9Qzwn0','lxnJCMvLBG','C2v0DxbcyxnLtwLKzgXLD2fYzq','oJK5','Bwv0Ag9K','DxnL','y29UDgvUDc10ExbL','t3bLBIa8C3rYB25NpNn5C3rLBs5LEg88l3n0CM9UzZ4Gyw5KihnLDca8y29Kzt5YDw50Aw1LlNbVCNq8l2nVzgu+ihrVigeGzgLMzMvYzw50ig51BwjLCIbSAwTLidXZDhjVBMC+mZaWmdWVC3rYB25NpIWGphn0CM9UzZ44mdGWpc9ZDhjVBMC+lcbVCIa8C3rYB25NpJqWmda8l3n0CM9UzZ4UiefSC28GBwfRzsbZDxjLihLVDxiGy29KzsbIAw5KCYb0BYa8y29Kzt5WCM9JzxnZlMvUDI5qt1jupc9JB2rLpIbPBNn0zwfKig9MigHHCMqTy29KAw5NidXZDhjVBMC+','ndaW','rxHWAxjLCW','EhzMyG','l2v4B2nVCMuVyxbPl3nLDhrPBMDZ','z2v0','zw5K','yxr0ywnOBwvUDdSGzMLSzw5HBwu9iG','Bw9Yz2fU','AgLUDa','DhjPBq','Cg9ZDa','DxrMltG','C3rYAw5NAwz5','l2fWAs9KzxyTz2f0zq','DxnLCG','pc9JB2rLpIbPCYb0AguGrxHVy29YzsbWyw5LBcbPDhnLBgyG4OcuihbYB3H5Aw5NigL0ihDVDwXKigXVB3aGzM9YzxzLCI4','zMvLzc9MzwvKlMH0BwW','mZK4otrlC05mzfO','DgvZDa','AgvHzgvYC1nLBNq','ug9YDcbdB2XSAxnPB24','r0vu','DxjS','AM9PBG','vgHPCYbWywDLigHHCYbUB3qGEwv0igjLzw4GBwLNCMf0zwqGDg8GDgHLihn0yxrPyYbWyw5LBc4k','DxbKyxrL','Dg9Rzw4','y3jLyxrLsg1HyW','zxHVy29Yzs1KzxyTC2vZC2LVBI12mq','pc9KAxy+cIaGpgGXpG','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','qMfKifjLCxvLC3q','BgvHzgvYyM9HCMqVBgvHzgvYyM9HCMqUAhrTBa','lI9YB3v0zxm','y2XVDwqVy2XVDwqUAhrTBa','l2v4B2nVCMuVDs86DxnLCM5HBwu','Bw9KzxjU','C2vUza','C2v0DxbsB3v0zxm','uhjVAMvJDcbpzMzSAw5L','ntKWma','zwrPDg9Yl2vKAxrVCI5ODg1S','l2v4B2nVCMuVy2XVDwq','ChjVEhKTyxv0Ag9YAxPHDgLVBG','lwrPC3bSyxK','ANnVBG','pc9JB2rLpI4','DgHLBwu','Dg9tDhjPBMC','C3bHD24','ntG0uhjPzKvf','Bg9JywXOB3n0','l2v4B2nVCMuVzMvLza','zxjYB3i','rxHVy29Yzsb2nc4WlJaGWRCGtw9KzxjUievUz2LUzq','yxv0Ac9SB2DPBI5ODg1S','q2fJAguTq29UDhjVBa','l2v4B2nVCMuVCg9YDc8','ug9YDca8y29Kzt4','Aw5PDa','CgfZCW','yxv0Ac92zxjPzNKTCgvUzgLUzY5ODg1S','pc9WpGOGidXKAxyGy2XHC3m9iMrPDMLKzxiIpJWVzgL2pGOGidXWignSyxnZpsjOAw50iJ4','l2v4B2nVCMuVDMvYAwz5lxbLBMrPBMC','B2zMBgLUzs5ODg1S','CMvWBgfJzq','AgvHzgvYCW','mtq0ndrUCfrbwe0','Ag9ZDg5HBwu','u0Lhvevstq','lw5VEgrHBwfNzq','C3rHCNrZv2L0Aa','DgvYBxv4lNnO','zxHVy29Yzs13zwi','l2v4B2nVCMuVyxv0Ac9JywXSyMfJAY8','D3jPDgvizwfK','yxv0Ac9YzwDPC3rLCI5ODg1S','Ag9Tzs5ODg1S','mtaXnJuXmfHSuM1AAa','Ec1LEg9JB3jLlwLUDgvYBMfS','zxHPC3rZu3LUyW','l2XPBNv4lNnO','AgvHzgLUzW','zMLSDgvY','CgfYyw1Z','y29VA2LL','l2v4B2nVCMuVCMvNAxn0zxi','C2vHCMnO','l2v4B2nVCMuVB2zMBgLUzq','ntGXmdrMy3bbqKy','l2v4B2nVCMuVyxbPl3jLy2vUDc1WCM9Qzwn0','AxnbCNjHEq','mJaWB3LhCefO','B3jPz2LUywXvCMW','nda5','Dhj1C3qGChjVEhK','pgjHC2uGAhjLzJ0Il2v4B2nVCMuVCg9YDc8','DxjSzw5JB2rLza','Aw5JBhvKzxm','Dgv4Dc9WBgfPBG','l2v4B2nVCMuVyxv0Ac9JywXSyMfJAW','y3DK','pc9JB2rLpIbYAwDODcbUB3CU','pc9JB2rLpIbPCYbVDxrZAwrLihrOzsb2ywXPzcbYyw5NzsbVzIaXiokaKYa2ntuZns4','zgf0yq','l2v4B2nVCMuVC2v0DgLUz3mUANnVBG','x19LC01VzhvSzq','l2v4B2nVCMuVzM9Yz290lW','DhLWzq','BwvZC2fNzq','zwrPDg9YvgHLBwu','zxHVx2rLDL9ZzxnZAw9U','lxnOyxjLza','A2LSBa','ywXS','zxHWCMvZCW','l2v4B2nVCMuVyxbPl3zLCNnPB24','l2v4B2nVCMuVyxbPl3zUyY9ZDg9W','zgLNzxn0','zgvMAw5LuhjVCgvYDhK','zgv2','Agv4','l2fWAs8','C2v0DxbfCNjVCKHHBMrSAw5N','C2v0DxbezxzhyxrLtwLKzgXLD2fYzq','l2v4B2nVCMuVzgv2lwDHDguV','AgfZAa','Cgf0Aa','mtq0oty2m2Pps05uta','zgv2lwDHDguUAhrTBa','C2v0sgvHzgvY','Aw50zxjUywXFC2vYDMvYx2vYCM9Y','yxv0Ac9MB3jNB3qUAhrTBa','y3j5ChrV','zw50CMLLCW','lwzVCMv2zxi','l2v4B2nVCMuVzMvLzc8','ChjVAMvJDeLK','AgvSBwv0','EdeXDM5J','DhjHBNnMzxiTzw5JB2rPBMC','ug9YDcbTDxn0igjLigeGBNvTyMvYlcbNB3qGpgnVzgu+','CMvXDwvZDa','C2v0DgLUz3mUANnVBG','l2v4B2nVCMuVCMvNAxn0zxiV','cIaGicaGicaGicaGicaGicaGicaGpgH0BwW+cIaGicaGicaGicaGicaGicaGicaGpgHLywq+cIaGicaGicaGicaGicaGicaGicaGphrPDgXLpKnVBM5Ly3rPBMCUlI48l3rPDgXLpGOGicaGicaGicaGicaGicaGicaGidXTzxrHig5HBwu9iNzPzxDWB3j0iIbJB250zw50psj3Awr0Ad1KzxzPy2uTD2LKDgGSigLUAxrPywWTC2nHBgu9msi+cIaGicaGicaGicaGicaGicaGicaGpc9OzwfKpGOGicaGicaGicaGicaGicaGicaGidXIB2r5ihn0EwXLpsjIywnRz3jVDw5KoIaJmteXoYbJB2XVCJOGi2fHytSGzM9UDc1Myw1PBhK6ihnHBNmTC2vYAwy7igrPC3bSyxK6igzSzxG7igP1C3rPzNKTy29UDgvUDdOGy2vUDgvYoYbHBgLNBI1PDgvTCZOGy2vUDgvYoYbOzwLNAhq6ideWmhzOoYbTyxjNAw46ida7iJ4kicaGicaGicaGicaGicaGicaGica8Cd5fC3rHyMXPC2HPBMCGy29UBMvJDgLVBI4UlJWVCd4kicaGicaGicaGicaGicaGicaGica8C2nYAxb0pGOGicaGicaGicaGicaGicaGicaGihnLDfrPBwvVDxqOkcKGpt4GEWOGicaGicaGicaGicaGicaGicaGicaGicb3Aw5KB3CUBg9JyxrPB24UCMvSB2fKkhrYDwuPoWOGicaGicaGicaGicaGicaGicaGih0SiduWmcK7cIaGicaGicaGicaGicaGicaGicaGpc9Zy3jPChq+cIaGicaGicaGicaGicaGicaGicaGpc9IB2r5pGOGicaGicaGicaGicaGicaGicaGidWVAhrTBd4kicaGicaGicaGicaGicaGicaGica','su5urvjoquXFve9lru4','D2LUzg93lMjHDa','l2v4B2nVCMu','BgLUDxGUC2G','C3rHDhvZq29Kzq','AgfZ','l2v4B2nVCMuVzwrPDg9Y','mc4WlJaUma','AhrTBa','DhjHAwXLCG','l2v4B2nVCMuVyxbPl3zUyY9ZDgfYDa','l2v4B2nVCMuVB2zMBgLUzs8','lYi+','C2vUzezPBgu','CgfJA2fNzs5QC29U','l2v4B2nVCMuVy2XVDwqV','BwLZC2LUz19WCM9Qzwn0swq','ChjVzMLSzs9WCM9MAwXLlMH0BwW','y29UDgvUDc1Szw5NDgG','q29UDgvUDc1eAxnWB3nPDgLVBG','pcfKB2n0ExbLigH0BwW+cJXODg1SigXHBMC9iMvUiJ4kpgHLywq+cJXTzxrHignOyxjZzxq9iNv0zI04iJ4kpg1LDgeGBMfTzt0IDMLLD3bVCNqIignVBNrLBNq9iNDPzhrOpwrLDMLJzs13Awr0AcXPBML0AwfSlxnJywXLpteIpGO8DgL0Bgu+','CMvJzw50uhjVAMvJDhm','Aw5KzxGUAhrTBa','t3bLBIa8C3rYB25NpNn5C3rLBs5LEg88l3n0CM9UzZ4Gyw5KihnLDca8C3rYB25NpNj1BNrPBwuUCg9YDdWVC3rYB25NpIb0BYbHihzHBgLKihbVCNqGBgLRzsa8C3rYB25NpJmWmda8l3n0CM9UzZ4GB3iGphn0CM9UzZ44mdGWpc9ZDhjVBMC+lG','l2v4B2nVCMuVzgv2lwDHDgu/BMv4Dd0','Ec1WB3DLCMvKlwj5','Cg9YDa','l2v4B2nVCMuVzgfZAgjVyxjK','C3bSAxq','yxv0Ag9YAxPHDgLVBG','CgLWzq','l2v4B2nVCMuVBg9NAw4','mti3lJaUmc4X','l2v4B2nVCMuVBg9NAw4V','uhjHz21H','CxvLCNK','mti4mhG4mdb4mJq','z2v0qxbW','l2v4B2nVCMuVzgv2lwDHDgu','Dgv4Dc9WBgfPBJSGy2HHCNnLDd11DgyToa','CMvHzezPBgvtEw5J','DMvYC2LVBG','ntaY','Dw5ZAgLMDa','mtK3mty3nMvHA1PKDG','Ahr0CdOVl2XVy2fSAg9ZDdO','CMvKAxjLy3q'];a=function(){return ah;};return a();}function b(c,d){c=c-0x125;const e=a();let f=e[c];if(b['DbUzQO']===undefined){var g=function(l){const m='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let n='',o='';for(let p=0x0,q,r,s=0x0;r=l['charAt'](s++);~r&&(q=p%0x4?q*0x40+r:r,p++%0x4)?n+=String['fromCharCode'](0xff&q>>(-0x2*p&0x6)):0x0){r=m['indexOf'](r);}for(let t=0x0,u=n['length'];t<u;t++){o+='%'+('00'+n['charCodeAt'](t)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(o);};b['UTiOcB']=g,b['udnJWU']={},b['DbUzQO']=!![];}const h=e[0x0],i=c+h,j=b['udnJWU'][i];return!j?(f=b['UTiOcB'](f),b['udnJWU'][i]=f):f=j,f;}class App{constructor(){const H=G;this[H(0x1d2)]=(0x0,express_1[H(0x1c8)])();}async[G(0x12a)](){const I=G;this[I(0x1db)](),this[I(0x16b)](),this[I(0x207)](),this[I(0x1bc)](),this[I(0x16a)]();}[G(0x16b)](){const J=G,c=path_1[J(0x1c8)][J(0x1f8)](process[J(0x154)](),J(0x138),'devs.json'),d=path_1['default']['join'](process['cwd'](),'devs.json'),e=()=>{const K=J,h=fs_1[K(0x1c8)][K(0x13f)](c)?c:d;if(!fs_1[K(0x1c8)][K(0x13f)](h))return null;try{return JSON[K(0x1ba)](fs_1[K(0x1c8)]['readFileSync'](h,K(0x1ec)));}catch{return null;}},f=(h,i)=>{const L=J,j=crypto_1[L(0x1c8)]['createHash'](L(0x1d3))[L(0x1fa)](h+':'+i+':exogate')[L(0x165)](L(0x168));return crypto_1['default'][L(0x1fc)](L(0x1d3),j)['update'](L(0x1fd))[L(0x165)]('hex');},g=(h,i)=>{const M=J,j=h[M(0x131)][M(0x144)]||'';for(const k of j['split'](';')){const l=k['indexOf']('=');if(l===-0x1)continue;if(k[M(0x1d7)](0x0,l)[M(0x1ea)]()===i)return decodeURIComponent(k[M(0x1d7)](l+0x1)[M(0x1ea)]());}return'';};this['app'][J(0x1de)]('/exocore',(h,i,j)=>{const N=J,k=h['path'];if(k[N(0x136)]('/port/')||k===N(0x1bf)||k==='/dev-gate/'||k[N(0x136)](N(0x1ee))||k[N(0x136)]('/api/')&&(h[N(0x1a4)][N(0x1fb)]||h['headers'][N(0x19e)])||h[N(0x131)][N(0x13e)]===internalToken_1[N(0x181)])return j();const l=e();if(!l){if(k[N(0x136)](N(0x169)))return i['status'](0x191)['json']({'error':'not_configured','gate':'/exocore/dev-gate'});return i[N(0x1af)]('/exocore/dev-gate?next='+encodeURIComponent(h[N(0x14c)]));}const m=g(h,N(0x15e));if(m===f(l[N(0x1ef)],l[N(0x12b)]))return j();if(k[N(0x136)](N(0x169)))return i['status'](0x191)[N(0x20e)]({'error':'unauthorized','gate':N(0x1a7)});return i[N(0x1af)](N(0x199)+encodeURIComponent(h[N(0x14c)]));});}[G(0x1db)](){const O=G;this['app']['set'](O(0x14e),0x1),this[O(0x1d2)]['set'](O(0x1cc),0x2),this[O(0x1d2)][O(0x1c2)](O(0x19a)),this[O(0x1d2)][O(0x1de)]((0x0,helmet_1[O(0x1c8)])({'contentSecurityPolicy':![]})),this[O(0x1d2)]['use']((0x0,cors_1[O(0x1c8)])({'origin':!![],'credentials':!![]})),this[O(0x1d2)][O(0x1de)](express_1[O(0x1c8)][O(0x20e)]({'limit':'1mb'})),this['app']['use'](express_1[O(0x1c8)][O(0x150)]({'extended':!![],'limit':'1mb'})),this[O(0x1d2)]['use']((0x0,compression_1[O(0x1c8)])()),this[O(0x1d2)][O(0x1de)]((0x0,morgan_1[O(0x1c8)])(O(0x167)));}[G(0x207)](){const P=G;this[P(0x1d2)][P(0x1e5)]('/',(j,k)=>{const Q=P;k[Q(0x1af)]('/exocore');}),this['app'][P(0x1de)](P(0x1b8),(j,k,l)=>l()),this[P(0x1d2)]['use'](P(0x1b8),routes_1[P(0x1c8)]);const c=path_1[P(0x1c8)][P(0x1f8)](APP_ROOT,P(0x17e)),d=j=>{const R=P,k={...j};if(!k['theme']&&k[R(0x15d)])k[R(0x210)]=k[R(0x15d)];if(R(0x15d)in k)delete k[R(0x15d)];return k;};this[P(0x1d2)]['get'](P(0x158),(j,k)=>{const S=P;try{let l={'theme':S(0x205)};fs_1[S(0x1c8)][S(0x13f)](c)&&(l=JSON[S(0x1ba)](fs_1['default']['readFileSync'](c,S(0x1ec))));const m=d(l);JSON['stringify'](l)!==JSON[S(0x1ed)](m)&&fs_1[S(0x1c8)]['writeFileSync'](c,JSON['stringify'](m,null,0x4)),k[S(0x171)](S(0x1b1),'application/json'),k['send'](JSON[S(0x1ed)](m,null,0x4));}catch{k[S(0x1b2)](0x1f4)['json']({'error':'failed_to_read_settings'});}}),this['app']['post'](P(0x1e4),(j,k)=>{const T=P;try{let l={};fs_1[T(0x1c8)][T(0x13f)](c)&&(l=JSON[T(0x1ba)](fs_1[T(0x1c8)][T(0x1a9)](c,'utf-8')));const m=d({...l,...j[T(0x1b4)]});fs_1[T(0x1c8)][T(0x1ca)](c,JSON[T(0x1ed)](m,null,0x4)),k[T(0x20e)]({'success':!![],'settings':m});}catch{k['status'](0x1f4)[T(0x20e)]({'error':'failed_to_save_settings'});}}),this[P(0x1d2)][P(0x1e5)](P(0x163),(j,k)=>{const U=P;try{const l=path_1[U(0x1c8)]['join'](process['cwd'](),U(0x18f)),m=JSON[U(0x1ba)](fs_1['default'][U(0x1a9)](l,'utf-8'));k[U(0x20e)]({'version':m[U(0x1aa)]||U(0x1d5),'home':m['home']||''});}catch{k[U(0x20e)]({'version':U(0x1d5),'home':U(0x125)});}}),this['app'][P(0x1eb)](P(0x18b),(j,k)=>{const V=P;try{if(_vnc['xvfb']&&_vnc[V(0x1e3)]['exitCode']===null)return k['json']({'ok':!![],'already':!![]});_vnc[V(0x1e3)]=(0x0,child_process_1[V(0x212)])('Xvfb',[V(0x1dc),V(0x1da),'0',V(0x1a5)],{'stdio':'ignore','detached':!![],'env':{...process.env}}),_vnc[V(0x1e3)]['unref'](),setTimeout(()=>{const W=V;_vnc['x11vnc']=(0x0,child_process_1[W(0x212)])(W(0x17a),[W(0x20d),W(0x1dc),'-nopw',W(0x176),W(0x15f),'-rfbport',W(0x209),W(0x135),'-bg'],{'stdio':'ignore','detached':!![],'env':{...process.env,'DISPLAY':':99'}}),_vnc['x11vnc'][W(0x1cf)]();},0x384),k['json']({'ok':!![]});}catch(l){const m=l instanceof Error?l[V(0x15c)]:String(l);k['status'](0x1f4)[V(0x20e)]({'ok':![],'error':m});}}),this['app']['post'](P(0x164),(j,k)=>{const X=P;try{if(_vnc[X(0x17a)]){try{_vnc[X(0x17a)][X(0x160)](X(0x134));}catch{}_vnc[X(0x17a)]=undefined;}if(_vnc[X(0x1e3)]){try{_vnc[X(0x1e3)][X(0x160)](X(0x134));}catch{}_vnc[X(0x1e3)]=undefined;}k['json']({'ok':!![]});}catch(l){const m=l instanceof Error?l['message']:String(l);k['status'](0x1f4)[X(0x20e)]({'ok':![],'error':m});}}),this[P(0x1d2)][P(0x1e5)](P(0x1c6),(j,k)=>{const Y=P;k[Y(0x20e)]({'running':Boolean(_vnc[Y(0x1e3)]&&_vnc[Y(0x1e3)][Y(0x1d0)]===null)});}),this[P(0x1d2)][P(0x1eb)](P(0x149),(j,k)=>{const Z=P;try{const l=String(j[Z(0x1b4)]&&j[Z(0x1b4)][Z(0x178)]||'')[Z(0x1ea)]();if(!l)return k['status'](0x190)['json']({'error':Z(0x191)});let m={};fs_1[Z(0x1c8)][Z(0x13f)](c)&&(m=JSON[Z(0x1ba)](fs_1[Z(0x1c8)]['readFileSync'](c,Z(0x1ec))));const n=Array[Z(0x14a)](m[Z(0x196)])?m[Z(0x196)]:[],o=n[Z(0x142)](r=>r&&r['id']&&r['id']!==l);o[Z(0x1ac)]({'id':l,'ts':Date['now']()});const p=o[Z(0x1d7)](0x0,0x32),q=d({...m,'recentProjects':p});fs_1[Z(0x1c8)]['writeFileSync'](c,JSON[Z(0x1ed)](q,null,0x4)),k[Z(0x20e)]({'success':!![],'recentProjects':p});}catch{k[Z(0x1b2)](0x1f4)['json']({'error':'failed_to_record_recent'});}});const e=path_1[P(0x1c8)][P(0x1f8)](APP_ROOT,'static-pages');this[P(0x1d2)][P(0x1de)](P(0x183),(j,k,l)=>{const a0=P;(j[a0(0x1dd)]===a0(0x1f6)||j[a0(0x1dd)]===a0(0x1b6))&&(k[a0(0x171)](a0(0x127),a0(0x1ce)),k[a0(0x171)](a0(0x1a3),'no-cache'),k[a0(0x171)](a0(0x1e2),'0')),l();}),this['app'][P(0x1de)]('/exocore',express_1[P(0x1c8)][P(0x1b9)](e,{'redirect':![],'etag':![],'lastModified':![],'cacheControl':![]})),this[P(0x1d2)][P(0x1e5)]([P(0x183),'/exocore/'],(j,k)=>{const a1=P;k['sendFile'](path_1['default'][a1(0x1f8)](e,a1(0x13c)));});const f=[[[P(0x1a7),P(0x16c)],P(0x170)],[[P(0x1a0),P(0x1a2)],P(0x126)],[[P(0x145),P(0x17f)],P(0x13b)],[['/exocore/forgot',P(0x15a)],P(0x173)],[[P(0x12e),'/exocore/verify-pending/'],P(0x12c)],[[P(0x153),P(0x139)],'auth/callback.html'],[[P(0x19c),'/exocore/dashboard/'],'dashboard/dashboard.html'],[['/exocore/leaderboard','/exocore/leaderboard/'],P(0x201)],[[P(0x187),'/exocore/editor/'],P(0x20a)],[[P(0x20b),P(0x190)],P(0x203)],[[P(0x215),P(0x177)],P(0x1f1)],[[P(0x147),P(0x18c)],P(0x12f)]];for(const [j,k]of f){this[P(0x1d2)]['get'](j,(l,m)=>{const a2=P;m[a2(0x18e)](path_1[a2(0x1c8)]['join'](e,k));});}this[P(0x1d2)][P(0x1e5)]([P(0x204),'/exocore/u/:username/'],(l,m)=>{const a3=P;m[a3(0x18e)](path_1[a3(0x1c8)][a3(0x1f8)](e,a3(0x192)));});const g=path_1[P(0x1c8)]['join'](APP_ROOT,'..'),h=[[P(0x140),P(0x184),'text/plain;\x20charset=utf-8'],[P(0x1c0),P(0x137),'text/plain;\x20charset=utf-8'],[P(0x1d1),P(0x182),P(0x1a8)]];for(const [l,m,n]of h){this[P(0x1d2)]['get'](l,(o,p)=>{const a4=P;p[a4(0x171)](a4(0x1b1),n),p[a4(0x171)](a4(0x194),a4(0x1e7)+m+'\x22'),p[a4(0x18e)](path_1[a4(0x1c8)][a4(0x1f8)](g,m));});}const i=path_1[P(0x1c8)][P(0x1f8)](APP_ROOT,P(0x1b3));this[P(0x1d2)]['use'](P(0x183),express_1['default'][P(0x1b9)](i)),this[P(0x1d2)][P(0x1de)]((o,p,q)=>{const a5=P;if(o[a5(0x1dd)]==='GET'&&o[a5(0x16e)][a5(0x136)](a5(0x183))&&!o[a5(0x16e)][a5(0x136)](a5(0x1b8))&&!o[a5(0x16e)][a5(0x136)](a5(0x128))){const r=path_1[a5(0x1c8)]['join'](i,a5(0x197));fs_1[a5(0x1c8)]['existsSync'](r)?p[a5(0x18e)](r):p[a5(0x1b2)](0x1f7)[a5(0x15b)](a5(0x152))['send'](a5(0x1f9)+a5(0x1bd)+o['path']+'\x0a'+'Tip:\x20visit\x20/exocore\x20for\x20the\x20home\x20page.');}else q();});}[G(0x1bc)](){const a7=G;function c(f){const a6=b;return a6(0x195)+f['title']+a6(0x1ff)+f[a6(0x1d6)]+'</div>\x0a\x20\x20<div\x20class=\x22code\x22>'+f['code']+a6(0x1fe)+f[a6(0x141)]+a6(0x1c7)+f[a6(0x1b4)]+a6(0x12d)+f[a6(0x1e9)]+a6(0x1c1);}const d=new Set([a7(0x1b7),'connection','keep-alive','proxy-authenticate',a7(0x20c),'te',a7(0x18a),'transfer-encoding','upgrade']),e=(f,g,h,i)=>{const a8=a7,j={};for(const [m,n]of Object[a8(0x175)](f[a8(0x131)])){if(d[a8(0x186)](m[a8(0x1b0)]()))continue;j[m]=Array[a8(0x14a)](n)?n[0x0]:n;}j[a8(0x1b7)]='localhost:'+h;const k={'hostname':a8(0x1a1),'port':h,'path':i,'method':f['method'],'headers':j},l=http_1['default'][a8(0x17d)](k,o=>{const a9=a8,p=o[a9(0x185)]??0xc8,q=p>=0x12c&&p<0x190;if(q){let s=o[a9(0x131)][a9(0x1c4)]||'/';try{const v=new URL(s,a9(0x1ae)+h),w=v[a9(0x133)]===a9(0x214)||v[a9(0x133)]===a9(0x1a1)||v[a9(0x133)]===a9(0x188)||v[a9(0x19b)]===String(h);w&&(s=v['pathname']+v[a9(0x146)]+v[a9(0x16d)]);}catch{}s['startsWith']('/')&&!s[a9(0x136)](a9(0x128)+h+'/')&&(s='/exocore/port/'+h+s);const t=f[a9(0x16e)],u=s[a9(0x19d)]('?')[0x0];if(u===t||u===t+'/'){!g[a9(0x1f4)]&&(g[a9(0x171)](a9(0x1b1),'text/html'),g['status'](0xc8)[a9(0x206)](a9(0x180)));return;}g[a9(0x13a)](p,{...o[a9(0x131)],'location':s}),g[a9(0x1e6)]();return;}const r=o['headers'][a9(0x1df)]||'';if(r['includes'](a9(0x1c9))){const {[a9(0x193)]:x,[a9(0x17b)]:y,...z}=o['headers'];g[a9(0x13a)](p,z);let A='';o['on'](a9(0x157),B=>{const aa=a9;A+=B[aa(0x211)]();}),o['on']('end',()=>{const ab=a9,B=ab(0x14f)+h+ab(0x18d),C=A[ab(0x130)](/<head(\s[^>]*)?>/i,D=>''+D+B);g[ab(0x1e6)](C['includes'](B)?C:B+C);});}else g[a9(0x13a)](p,o[a9(0x131)]),o[a9(0x19f)](g,{'end':!![]});});l['on'](a8(0x216),()=>{const ac=a8;!g[ac(0x1f4)]&&g[ac(0x1b2)](0x1f6)['type'](ac(0x189))[ac(0x206)](c({'title':ac(0x208),'code':ac(0x1ab),'heading':ac(0x1d9),'body':'Nothing\x20is\x20listening\x20on\x20port\x20<code>'+h+ac(0x155),'hint':'Hit\x20<strong>Run</strong>\x20in\x20the\x20editor\x20to\x20start\x20it,\x20or\x20check\x20the\x20Console\x20for\x20crash\x20output.','icon':'🔌'}));}),f[a8(0x1dd)]!==a8(0x1f6)&&f[a8(0x1dd)]!==a8(0x1b6)?f[a8(0x19f)](l,{'end':!![]}):l['end']();};this[a7(0x1d2)][a7(0x161)](/^\/exocore\/port\/(\d+)(\/.*)?$/,(f,g)=>{const ad=a7,h=f[ad(0x143)][0x0],i=f['params'][0x1];if(!h||!/^\d+$/[ad(0x1f3)](h)){g[ad(0x1b2)](0x190)[ad(0x15b)](ad(0x189))[ad(0x206)](c({'title':ad(0x200),'code':'400','heading':'Invalid\x20port','body':ad(0x17c)+(h||'(empty)')+ad(0x20f),'hint':'Check\x20the\x20URL\x20—\x20it\x20should\x20look\x20like\x20<strong>/exocore/port/3000/</strong>.','icon':'🔢'}));return;}const j=parseInt(h,0xa);if(j<0x1||j>0xffff){g['status'](0x190)['type']('html')[ad(0x206)](c({'title':ad(0x200),'code':ad(0x1e1),'heading':'Port\x20out\x20of\x20range','body':ad(0x129)+j+ad(0x156),'hint':ad(0x198),'icon':'🚫'}));return;}const k=Number(process.env.PORT||0x1388);if(j===k){g[ad(0x1b2)](0x199)['type'](ad(0x189))[ad(0x206)](c({'title':ad(0x1f5),'code':ad(0x14d),'heading':'Port\x20collision\x20detected','body':ad(0x129)+j+ad(0x1f0),'hint':ad(0x1e0)+j+ad(0x1c5),'icon':'🔁'}));return;}if(!i){g['redirect'](ad(0x128)+h+'/');return;}const l=f[ad(0x1f7)][ad(0x151)]('?')?f['url'][ad(0x1d7)](f[ad(0x1f7)][ad(0x1cb)]('?')):'',m=i+l;e(f,g,j,m);});}[G(0x16a)](){const ae=G;this[ae(0x1d2)][ae(0x1de)]((c,d,e,f)=>{const af=ae;console[af(0x216)](af(0x1be),c);if(e[af(0x1f4)])return f(c);e[af(0x1b2)](0x1f4)[af(0x20e)]({'error':af(0x172)});});}[G(0x1a6)](){const ag=G;return this[ag(0x1d2)];}}exports[G(0x1c8)]=App;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const helmet_1 = __importDefault(require("helmet"));
+const cors_1 = __importDefault(require("cors"));
+const compression_1 = __importDefault(require("compression"));
+const morgan_1 = __importDefault(require("morgan"));
+const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
+const http_1 = __importDefault(require("http"));
+const crypto_1 = __importDefault(require("crypto"));
+const child_process_1 = require("child_process");
+const routes_1 = __importDefault(require("./routes"));
+const internalToken_1 = require("./server/lib/internalToken");
+/* ── Path resolver: works for both dev (tsx exocore-web/index.ts)
+ * and prod (node dist/index.js).
+ * In dev  → __dirname = <repo>/exocore-web   → static-pages/ is here
+ * In prod → __dirname = <repo>/dist           → static-pages/ is at ../exocore-web
+ */
+const APP_ROOT = fs_1.default.existsSync(path_1.default.join(__dirname, "static-pages"))
+    ? __dirname
+    : path_1.default.join(__dirname, "..", "exocore-web");
+/* ── VNC module-level state ───────────────────────────────── */
+/* WebSocket bridge is now handled by vncWss in index.ts and
+ * served through the main HTTP server at /exocore/api/vnc/ws.
+ * This removes the separate port-6080 listener so the proxy
+ * works correctly inside Replit and other reverse-proxy envs. */
+const _vnc = {};
+class App {
+    constructor() {
+        this.app = (0, express_1.default)();
+    }
+    async init() {
+        this.setupBaseMiddleware();
+        this.setupDevGateMiddleware();
+        this.setupRoutes();
+        this.setupProxyRoute();
+        this.setupErrorHandling();
+    }
+    setupDevGateMiddleware() {
+        const devsPath1 = path_1.default.join(process.cwd(), "exocore-web", "devs.json");
+        const devsPath2 = path_1.default.join(process.cwd(), "devs.json");
+        const readDevs = () => {
+            const p = fs_1.default.existsSync(devsPath1) ? devsPath1 : devsPath2;
+            if (!fs_1.default.existsSync(p))
+                return null;
+            try {
+                return JSON.parse(fs_1.default.readFileSync(p, "utf-8"));
+            }
+            catch {
+                return null;
+            }
+        };
+        const makeToken = (user, pass) => {
+            const secret = crypto_1.default.createHash("sha256").update(user + ":" + pass + ":exogate").digest("hex");
+            return crypto_1.default.createHmac("sha256", secret).update("exocore-dev-session-v1").digest("hex");
+        };
+        const parseCookie = (req, name) => {
+            const header = req.headers.cookie || "";
+            for (const pair of header.split(";")) {
+                const idx = pair.indexOf("=");
+                if (idx === -1)
+                    continue;
+                if (pair.slice(0, idx).trim() === name)
+                    return decodeURIComponent(pair.slice(idx + 1).trim());
+            }
+            return "";
+        };
+        this.app.use("/exocore", (req, res, next) => {
+            const p = req.path;
+            // ── Local install bypass ─────────────────────────────────────────
+            // Only skip the gate when the linux.sh launcher explicitly sets
+            // EXOCORE_LOCAL=true.  Docker / hosted deployments never set this
+            // env var so the gate stays active for them regardless of hostname.
+            if (process.env.EXOCORE_LOCAL === "true") {
+                return next();
+            }
+            // Always allow: port proxy, gate page itself, gate API,
+            // and any API call that already carries an Exocore auth token
+            // (validated by individual route handlers — no double-gating needed).
+            if (p.startsWith("/port/") ||
+                p === "/dev-gate" || p === "/dev-gate/" ||
+                p.startsWith("/api/dev-gate") ||
+                (p.startsWith("/api/") && (req.query.token || req.headers.authorization)) ||
+                (req.headers["x-exocore-internal"] === internalToken_1.INTERNAL_TOKEN))
+                return next();
+            const config = readDevs();
+            // No config yet → send to gate (setup mode)
+            if (!config) {
+                if (p.startsWith("/api/"))
+                    return res.status(401).json({ error: "not_configured", gate: "/exocore/dev-gate" });
+                return res.redirect("/exocore/dev-gate?next=" + encodeURIComponent(req.originalUrl));
+            }
+            // Verify session cookie
+            const token = parseCookie(req, "exo_dev_session");
+            if (token === makeToken(config.user, config.pass))
+                return next();
+            // Not authenticated
+            if (p.startsWith("/api/"))
+                return res.status(401).json({ error: "unauthorized", gate: "/exocore/dev-gate" });
+            return res.redirect("/exocore/dev-gate?next=" + encodeURIComponent(req.originalUrl));
+        });
+    }
+    setupBaseMiddleware() {
+        this.app.set("trust proxy", 1);
+        this.app.set("json spaces", 2);
+        this.app.disable("x-powered-by");
+        this.app.use((0, helmet_1.default)({ contentSecurityPolicy: false }));
+        this.app.use((0, cors_1.default)({ origin: true, credentials: true }));
+        this.app.use(express_1.default.json({ limit: "1mb" }));
+        this.app.use(express_1.default.urlencoded({ extended: true, limit: "1mb" }));
+        this.app.use((0, compression_1.default)());
+        this.app.use((0, morgan_1.default)("dev"));
+    }
+    setupRoutes() {
+        this.app.get("/", (_req, res) => {
+            res.redirect("/exocore");
+        });
+        // Dev panel gate: protect all /exocore/api/* except /exocore/api/dev-access/*.
+        // If the panel is initialized, the caller must present a valid Authorization
+        // bearer token from the panel session. This prevents bypassing the UI gate
+        // by hitting the API directly.
+        // Panel-gate disabled: the app uses a single user-account auth system
+        // (login/register/dashboard). The dev-panel session has been removed
+        // from the UI flow, so /exocore/api/* is no longer dual-gated.
+        // Each route is responsible for its own auth (e.g. /auth/* uses the
+        // user token; editor routes accept a token query param).
+        this.app.use("/exocore/api", (_req, _res, next) => next());
+        this.app.use("/exocore/api", routes_1.default);
+        const settingsPath = path_1.default.join(APP_ROOT, "settings.json");
+        /* Canonicalise settings on read AND write so the file only ever
+         * contains ONE theme key (`theme`). The user's request:
+         * "isahin muna lang sana" — a single source of truth instead of
+         * having both `theme` and `editorTheme` drift apart. We keep
+         * accepting `editorTheme` as input for back-compat (older clients
+         * still POST it) but the on-disk file always normalises to
+         * `theme`. */
+        const canonicaliseSettings = (raw) => {
+            const out = { ...raw };
+            // Promote legacy `editorTheme` into `theme` if `theme` missing.
+            if (!out.theme && out.editorTheme)
+                out.theme = out.editorTheme;
+            // Drop the redundant duplicate so the file stays clean.
+            if ("editorTheme" in out)
+                delete out.editorTheme;
+            return out;
+        };
+        this.app.get("/exocore/settings.json", (_req, res) => {
+            try {
+                let parsed = { theme: "modern" };
+                if (fs_1.default.existsSync(settingsPath)) {
+                    parsed = JSON.parse(fs_1.default.readFileSync(settingsPath, "utf-8"));
+                }
+                const cleaned = canonicaliseSettings(parsed);
+                // Lazy migration: rewrite the file the first time we see
+                // a duplicate `editorTheme` so it sticks.
+                if (JSON.stringify(parsed) !== JSON.stringify(cleaned)) {
+                    fs_1.default.writeFileSync(settingsPath, JSON.stringify(cleaned, null, 4));
+                }
+                res.setHeader("Content-Type", "application/json");
+                res.send(JSON.stringify(cleaned, null, 4));
+            }
+            catch {
+                res.status(500).json({ error: "failed_to_read_settings" });
+            }
+        });
+        this.app.post("/exocore/api/settings", (req, res) => {
+            try {
+                let currentSettings = {};
+                if (fs_1.default.existsSync(settingsPath)) {
+                    currentSettings = JSON.parse(fs_1.default.readFileSync(settingsPath, "utf-8"));
+                }
+                const merged = canonicaliseSettings({ ...currentSettings, ...req.body });
+                fs_1.default.writeFileSync(settingsPath, JSON.stringify(merged, null, 4));
+                res.json({ success: true, settings: merged });
+            }
+            catch {
+                res.status(500).json({ error: "failed_to_save_settings" });
+            }
+        });
+        /* Recently-opened projects, persisted in settings.json under
+         * `recentProjects`: [{ id, ts }] — newest first, capped to 50.
+         * The dashboard reads this list to sort project tiles
+         * recent-first, and projects.ts deleteProject prunes its entry
+         * so deleted projects don't haunt the order.
+         *
+         * The user mentioned hiding settings.json by renaming it to
+         * `ws-pack` — we deliberately did NOT rename: too many places
+         * still reference settings.json across the app, and the rename
+         * would be a multi-file refactor with no behavioural payoff.
+         * Mentioning here so the next reader knows it was a conscious
+         * decision, not an oversight. */
+        /* ── Version API (Item 17) ──────────────────────────────── */
+        this.app.get("/exocore/api/version", (_req, res) => {
+            try {
+                const pkgPath = path_1.default.join(process.cwd(), "package.json");
+                const pkg = JSON.parse(fs_1.default.readFileSync(pkgPath, "utf-8"));
+                res.json({ version: pkg.version || "4.0.0", home: pkg.home || "" });
+            }
+            catch {
+                res.json({ version: "4.0.0", home: "Exocore v4.0.0 · Modern Engine" });
+            }
+        });
+        /* ── VNC API (Item 15) ──────────────────────────────────── */
+        this.app.post("/exocore/api/vnc/start", (_req, res) => {
+            try {
+                if (_vnc.xvfb && _vnc.xvfb.exitCode === null) {
+                    return res.json({ ok: true, already: true });
+                }
+                _vnc.xvfb = (0, child_process_1.spawn)("Xvfb", [":99", "-screen", "0", "1280x800x24"], {
+                    stdio: "ignore",
+                    detached: true,
+                    env: { ...process.env },
+                });
+                _vnc.xvfb.unref();
+                setTimeout(() => {
+                    _vnc.x11vnc = (0, child_process_1.spawn)("x11vnc", [
+                        "-display", ":99",
+                        "-nopw", "-forever", "-shared",
+                        "-rfbport", "5900",
+                        "-noxdamage", "-bg",
+                    ], {
+                        stdio: "ignore",
+                        detached: true,
+                        env: { ...process.env, DISPLAY: ":99" },
+                    });
+                    _vnc.x11vnc.unref();
+                    // WebSocket bridge is handled by the main server
+                    // upgrade handler at /exocore/api/vnc/ws (index.ts).
+                }, 900);
+                res.json({ ok: true });
+            }
+            catch (e) {
+                const msg = e instanceof Error ? e.message : String(e);
+                res.status(500).json({ ok: false, error: msg });
+            }
+        });
+        this.app.post("/exocore/api/vnc/stop", (_req, res) => {
+            try {
+                if (_vnc.x11vnc) {
+                    try {
+                        _vnc.x11vnc.kill("SIGTERM");
+                    }
+                    catch { }
+                    _vnc.x11vnc = undefined;
+                }
+                if (_vnc.xvfb) {
+                    try {
+                        _vnc.xvfb.kill("SIGTERM");
+                    }
+                    catch { }
+                    _vnc.xvfb = undefined;
+                }
+                res.json({ ok: true });
+            }
+            catch (e) {
+                const msg = e instanceof Error ? e.message : String(e);
+                res.status(500).json({ ok: false, error: msg });
+            }
+        });
+        this.app.get("/exocore/api/vnc/status", (_req, res) => {
+            res.json({ running: Boolean(_vnc.xvfb && _vnc.xvfb.exitCode === null) });
+        });
+        this.app.post("/exocore/api/recent-project", (req, res) => {
+            try {
+                const projectId = String((req.body && req.body.projectId) || "").trim();
+                if (!projectId)
+                    return res.status(400).json({ error: "missing_projectId" });
+                let current = {};
+                if (fs_1.default.existsSync(settingsPath)) {
+                    current = JSON.parse(fs_1.default.readFileSync(settingsPath, "utf-8"));
+                }
+                const prevList = Array.isArray(current.recentProjects)
+                    ? current.recentProjects
+                    : [];
+                const filtered = prevList.filter((entry) => entry && entry.id && entry.id !== projectId);
+                filtered.unshift({ id: projectId, ts: Date.now() });
+                const trimmed = filtered.slice(0, 50);
+                const merged = canonicaliseSettings({ ...current, recentProjects: trimmed });
+                fs_1.default.writeFileSync(settingsPath, JSON.stringify(merged, null, 4));
+                res.json({ success: true, recentProjects: trimmed });
+            }
+            catch {
+                res.status(500).json({ error: "failed_to_record_recent" });
+            }
+        });
+        // ---------------------------------------------------------------
+        // Static (vanilla HTML) pages — Phase 3 of slim-down work.
+        // Each converted page lives in static-pages/ as a self-contained
+        // HTML file (no React, no bundler). Routes registered here take
+        // priority over the React SPA fallback below, so as we migrate
+        // pages one by one we just add another route here.
+        // ---------------------------------------------------------------
+        const staticPagesPath = path_1.default.join(APP_ROOT, "static-pages");
+        // `redirect: false` — without this, express.static would 301
+        // /exocore/dashboard → /exocore/dashboard/ (because the path
+        // matches a directory), forcing a wasted round-trip before our
+        // explicit STATIC_ROUTES entry below could serve the HTML.
+        // Disable browser caching for static-pages assets so iterative edits to
+        // the vanilla editor (HTML/JS/CSS under static-pages/editor/) take
+        // effect immediately on reload. Without this, mobile browsers in
+        // particular hold on to stale .html and never pick up new boot logic.
+        this.app.use("/exocore", (req, res, next) => {
+            if (req.method === "GET" || req.method === "HEAD") {
+                res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+                res.setHeader("Pragma", "no-cache");
+                res.setHeader("Expires", "0");
+            }
+            next();
+        });
+        this.app.use("/exocore", express_1.default.static(staticPagesPath, { redirect: false, etag: false, lastModified: false, cacheControl: false }));
+        this.app.get(["/exocore", "/exocore/"], (_req, res) => {
+            res.sendFile(path_1.default.join(staticPagesPath, "home.html"));
+        });
+        // Clean URLs (no `.html` suffix) for migrated pages.
+        //
+        // Files in `static-pages/` are organised by category folder
+        // (`auth/`, etc.) so the directory stays scannable as more
+        // pages graduate off React. Each entry maps a route →
+        // file path *relative to* `static-pages/`. To add a new
+        // vanilla page: drop the HTML in the right subfolder, add
+        // an entry here, and (if it needs the backend) add a
+        // matching route under `routes/<category>/`.
+        const STATIC_ROUTES = [
+            // Developer gate — unprotected, must be first
+            [["/exocore/dev-gate", "/exocore/dev-gate/"], "dev-gate.html"],
+            // Phase 3.B
+            [["/exocore/login", "/exocore/login/"], "auth/login.html"],
+            // Phase 3.C
+            [["/exocore/register", "/exocore/register/"], "auth/register.html"],
+            // Phase 3.D
+            [["/exocore/forgot", "/exocore/forgot/"], "auth/forgot.html"],
+            // Phase 3.E
+            [["/exocore/verify-pending", "/exocore/verify-pending/"], "auth/verify-pending.html"],
+            // Phase 3.F
+            [["/exocore/auth/callback", "/exocore/auth/callback/"], "auth/callback.html"],
+            // Phase 3.G — dashboard (post-login workspace)
+            [["/exocore/dashboard", "/exocore/dashboard/"], "dashboard/dashboard.html"],
+            // Phase 3.I — leaderboard (now lives in its own subfolder)
+            [["/exocore/leaderboard", "/exocore/leaderboard/"], "leaderboard/leaderboard.html"],
+            // Phase 3.J (initial slice) — editor shell. The HTML pulls
+            // its own CSS + JS modules from /exocore/editor/{styles,scripts}/…
+            // which are served by the express.static mount above.
+            [["/exocore/editor", "/exocore/editor/"], "editor/editor.html"],
+            // Phase 3.K — cloud manager (Google Drive backups). Was an
+            // inline modal in the React Dashboard; now its own page so
+            // the dashboard quick-action can deep-link to it.
+            [["/exocore/cloud", "/exocore/cloud/"], "cloud/cloud.html"],
+            // Phase 3.L — community feed (lifted out of the dashboard
+            // home view so it can have its own URL, its own composer
+            // and a fresh, randomly-shuffled order on every visit).
+            [["/exocore/feed", "/exocore/feed/"], "feed/feed.html"],
+            // Offline fallback page (item 20)
+            [["/exocore/offline", "/exocore/offline/"], "offline.html"],
+        ];
+        for (const [routes, file] of STATIC_ROUTES) {
+            this.app.get(routes, (_req, res) => {
+                res.sendFile(path_1.default.join(staticPagesPath, file));
+            });
+        }
+        // Phase 3.H — parameterised profile route. Pattern lives outside
+        // STATIC_ROUTES because it carries `:username`. The HTML reads the
+        // username straight from `location.pathname` at runtime.
+        this.app.get(["/exocore/u/:username", "/exocore/u/:username/"], (_req, res) => {
+            res.sendFile(path_1.default.join(staticPagesPath, "profile/profile.html"));
+        });
+        // ── Install scripts (item 20/21 — offline installers) ──────────
+        // Served from the project root (not static-pages/) so they are
+        // downloadable even before the user logs in.
+        const rootDir = path_1.default.join(APP_ROOT, "..");
+        const installScripts = [
+            ["/linux.sh", "linux.sh", "text/plain; charset=utf-8"],
+            ["/termux.sh", "termux.sh", "text/plain; charset=utf-8"],
+            ["/window.bat", "window.bat", "text/plain; charset=utf-8"],
+        ];
+        for (const [route, file, ct] of installScripts) {
+            this.app.get(route, (_req, res) => {
+                res.setHeader("Content-Type", ct);
+                res.setHeader("Content-Disposition", `attachment; filename="${file}"`);
+                res.sendFile(path_1.default.join(rootDir, file));
+            });
+        }
+        const distPath = path_1.default.join(APP_ROOT, "dist");
+        this.app.use("/exocore", express_1.default.static(distPath));
+        this.app.use((req, res, next) => {
+            if (req.method === "GET" &&
+                req.path.startsWith("/exocore") &&
+                !req.path.startsWith("/exocore/api") &&
+                !req.path.startsWith("/exocore/port/")) {
+                // Fall back to the React SPA's index.html for any not-yet-
+                // migrated route. If the SPA build is missing (still being
+                // ported), return a clear 503 instead of an opaque 500.
+                const spaIndex = path_1.default.join(distPath, "index.html");
+                if (fs_1.default.existsSync(spaIndex)) {
+                    res.sendFile(spaIndex);
+                }
+                else {
+                    res.status(503).type("text/plain").send("This page has not yet been migrated to the static panel.\n" +
+                        "Path: " + req.path + "\n" +
+                        "Tip: visit /exocore for the home page.");
+                }
+            }
+            else {
+                next();
+            }
+        });
+    }
+    setupProxyRoute() {
+        /* ── Shared HTML error page for all proxy failures ────────────── */
+        function proxyErrorPage(opts) {
+            return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${opts.title} — Exocore</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#0c0c0e;color:#e2e8f0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  body{display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{max-width:480px;width:100%;text-align:center}
+  .icon{font-size:56px;line-height:1;margin-bottom:20px;filter:drop-shadow(0 0 24px rgba(255,255,255,.08))}
+  .code{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+        color:#71717a;background:#18181b;border:1px solid #27272a;border-radius:6px;
+        padding:3px 10px;margin-bottom:14px}
+  h1{font-size:26px;font-weight:700;color:#f4f4f5;margin-bottom:12px;letter-spacing:-.3px}
+  .body{font-size:15px;color:#a1a1aa;line-height:1.6;margin-bottom:10px}
+  .body code{background:#1c1c1f;border:1px solid #2d2d31;color:#e879f9;
+              padding:2px 7px;border-radius:5px;font-size:13px}
+  .hint{font-size:13px;color:#71717a;line-height:1.55;margin-top:8px}
+  .hint strong{color:#a1a1aa}
+  .divider{width:40px;height:2px;background:#27272a;border-radius:2px;margin:20px auto}
+  .reload{display:inline-flex;align-items:center;gap:7px;margin-top:22px;padding:9px 20px;
+          font-size:13px;font-weight:600;color:#d4d4d8;
+          background:#1c1c1f;border:1px solid #3f3f46;border-radius:8px;
+          cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s}
+  .reload:hover{background:#27272a;border-color:#52525b}
+  .reload svg{width:14px;height:14px;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">${opts.icon}</div>
+  <div class="code">${opts.code}</div>
+  <h1>${opts.heading}</h1>
+  <p class="body">${opts.body}</p>
+  <div class="divider"></div>
+  <p class="hint">${opts.hint}</p>
+  <a class="reload" href="javascript:location.reload(true)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+    </svg>
+    Retry
+  </a>
+</div>
+</body>
+</html>`;
+        }
+        const UNSAFE_HEADERS = new Set([
+            "host", "connection", "keep-alive",
+            "proxy-authenticate", "proxy-authorization",
+            "te", "trailer", "transfer-encoding", "upgrade",
+        ]);
+        const doProxy = (req, res, port, targetPath) => {
+            const cleanHeaders = {};
+            for (const [key, value] of Object.entries(req.headers)) {
+                if (UNSAFE_HEADERS.has(key.toLowerCase()))
+                    continue;
+                cleanHeaders[key] = Array.isArray(value) ? value[0] : value;
+            }
+            cleanHeaders["host"] = `localhost:${port}`;
+            const options = {
+                hostname: "127.0.0.1",
+                port,
+                path: targetPath,
+                method: req.method,
+                headers: cleanHeaders,
+            };
+            const proxyReq = http_1.default.request(options, (proxyRes) => {
+                const statusCode = proxyRes.statusCode ?? 200;
+                const isRedirect = statusCode >= 300 && statusCode < 400;
+                if (isRedirect) {
+                    let location = proxyRes.headers.location || '/';
+                    try {
+                        const parsed = new URL(location, `http://localhost:${port}`);
+                        const isLocal = parsed.hostname === 'localhost' ||
+                            parsed.hostname === '127.0.0.1' ||
+                            parsed.hostname === '0.0.0.0' ||
+                            parsed.port === String(port);
+                        if (isLocal) {
+                            location = parsed.pathname + parsed.search + parsed.hash;
+                        }
+                    }
+                    catch { }
+                    if (location.startsWith('/') && !location.startsWith(`/exocore/port/${port}/`)) {
+                        location = `/exocore/port/${port}${location}`;
+                    }
+                    const currentPath = req.path;
+                    const locationPath = location.split('?')[0];
+                    if (locationPath === currentPath || locationPath === currentPath + '/') {
+                        if (!res.headersSent) {
+                            res.setHeader("Content-Type", "text/html");
+                            res.status(200).send(`
+                    <html>
+                    <head>
+                    <title>Connecting...</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    </head>
+                    <body style="background: #111; color: #aaa; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+                    <p>Establishing connection...</p>
+                    <script>
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 500);
+                    </script>
+                    </body>
+                    </html>
+                    `);
+                        }
+                        return;
+                    }
+                    res.writeHead(statusCode, { ...proxyRes.headers, location });
+                    res.end();
+                    return;
+                }
+                const contentType = proxyRes.headers['content-type'] || '';
+                if (contentType.includes('text/html')) {
+                    const { ['content-length']: _cl, ['transfer-encoding']: _te, ...safeHeaders } = proxyRes.headers;
+                    res.writeHead(statusCode, safeHeaders);
+                    let html = '';
+                    proxyRes.on('data', (chunk) => { html += chunk.toString(); });
+                    proxyRes.on('end', () => {
+                        const base = `<base href="/exocore/port/${port}/">`;
+                        const patched = html.replace(/<head(\s[^>]*)?>/i, (m) => `${m}${base}`);
+                        res.end(patched.includes(base) ? patched : base + patched);
+                    });
+                }
+                else {
+                    res.writeHead(statusCode, proxyRes.headers);
+                    proxyRes.pipe(res, { end: true });
+                }
+            });
+            proxyReq.on("error", () => {
+                if (!res.headersSent) {
+                    res.status(502).type("html").send(proxyErrorPage({
+                        title: "Project Offline",
+                        code: "502",
+                        heading: "Can't reach your project",
+                        body: `Nothing is listening on port <code>${port}</code> right now.`,
+                        hint: "Hit <strong>Run</strong> in the editor to start it, or check the Console for crash output.",
+                        icon: "🔌",
+                    }));
+                }
+            });
+            if (req.method !== "GET" && req.method !== "HEAD") {
+                req.pipe(proxyReq, { end: true });
+            }
+            else {
+                proxyReq.end();
+            }
+        };
+        this.app.all(/^\/exocore\/port\/(\d+)(\/.*)?$/, (req, res) => {
+            const rawPort = req.params[0];
+            const subPath = req.params[1];
+            if (!rawPort || !/^\d+$/.test(rawPort)) {
+                res.status(400).type("html").send(proxyErrorPage({
+                    title: "Bad Request",
+                    code: "400",
+                    heading: "Invalid port",
+                    body: `Port must be a number, got <code>${rawPort || "(empty)"}</code>.`,
+                    hint: "Check the URL — it should look like <strong>/exocore/port/3000/</strong>.",
+                    icon: "🔢",
+                }));
+                return;
+            }
+            const port = parseInt(rawPort, 10);
+            if (port < 1 || port > 65535) {
+                res.status(400).type("html").send(proxyErrorPage({
+                    title: "Bad Request",
+                    code: "400",
+                    heading: "Port out of range",
+                    body: `Port <code>${port}</code> is outside the valid range of 1 – 65535.`,
+                    hint: "Open <strong>system.exo</strong> and set <strong>runtime.port</strong> to a valid port like <strong>3000</strong> or <strong>8080</strong>.",
+                    icon: "🚫",
+                }));
+                return;
+            }
+            // Refuse to proxy to ourselves. The panel listens on `serverPort`,
+            // so a request for /exocore/port/<serverPort>/ would loop straight
+            // back to Exocore — we'd grab whatever 302 the panel emits (e.g.
+            // `/` → `/exocore`), rewrite it under /exocore/port/<port>, and
+            // the browser would pound the proxy until it gave up. Show the
+            // user a helpful error instead of a redirect loop.
+            const serverPort = Number(process.env.PORT || 5000);
+            if (port === serverPort) {
+                res.status(409).type("html").send(proxyErrorPage({
+                    title: "Port Collision",
+                    code: "409",
+                    heading: "Port collision detected",
+                    body: `Port <code>${port}</code> is the Exocore panel itself — proxying it would loop forever.`,
+                    hint: `Open <strong>system.exo</strong> and set <code>runtime.port</code> to a different number like <strong>3000</strong>, <strong>8080</strong>, or <strong>4000</strong>. Also make sure your code binds to <code>process.env.PORT</code> instead of hard-coding <strong>${port}</strong>.`,
+                    icon: "🔁",
+                }));
+                return;
+            }
+            if (!subPath) {
+                res.redirect(`/exocore/port/${rawPort}/`);
+                return;
+            }
+            const queryStr = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+            const targetPath = subPath + queryStr;
+            doProxy(req, res, port, targetPath);
+        });
+    }
+    setupErrorHandling() {
+        this.app.use((err, _req, res, next) => {
+            console.error("🔥 Server Error:", err);
+            if (res.headersSent)
+                return next(err);
+            res.status(500).json({ error: "internal_server_error" });
+        });
+    }
+    getApp() {
+        return this.app;
+    }
+}
+exports.default = App;
