@@ -4,7 +4,7 @@
 #  Supports: Ubuntu 20.04+, Debian 11+, Fedora 36+, Arch, openSUSE
 #
 #  Usage:
-#    curl -fsSL https://raw.githubusercontent.com/your-org/exocore/main/linux.sh | bash
+#    curl -fsSL https://raw.githubusercontent.com/Exocore-Organization/exocore-web/main/linux.sh | bash
 #  or locally:
 #    chmod +x linux.sh && ./linux.sh
 # ════════════════════════════════════════════════════════════════════════════
@@ -13,8 +13,11 @@ set -euo pipefail
 EXOCORE_DIR="${EXOCORE_DIR:-$HOME/.exocore}"
 EXOCORE_PORT="${PORT:-5000}"
 NODE_MIN=18
-REPO_URL="${REPO_URL:-https://github.com/your-org/exocore}"
+REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web}"
 BRANCH="${BRANCH:-main}"
+
+# Disable git credential prompts — fail immediately if repo is inaccessible
+export GIT_TERMINAL_PROMPT=0
 
 # ── color helpers ────────────────────────────────────────────────────────────
 RED='\033[0;31m'; GRN='\033[0;32m'; YEL='\033[1;33m'
