@@ -177,7 +177,6 @@ main() {
     check_node
     fetch_repo
     install_deps
-    verify_dist
     create_launcher
     create_service
     finish
