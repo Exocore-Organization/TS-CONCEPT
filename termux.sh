@@ -52,7 +52,7 @@ HOME_DIR="${HOME:-/data/data/com.termux/files/home}"
 
 # Target always inside Termux home (no sdcard symlink issues)
 WORKDIR="$HOME_DIR/exocore-web"
-REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web}"
+REPO_URL="${REPO_URL:-https://github.com/your-org/exocore}"
 BRANCH="${BRANCH:-main}"
 EXOCORE_PORT="${PORT:-5000}"
 
@@ -222,7 +222,7 @@ PYEOF
 # ── Create the `exocore` alias ────────────────────────────────────────────────
 create_alias() {
     local rc="$HOME_DIR/.bashrc"
-    local alias_line="alias exocore='cd $WORKDIR && PORT=$EXOCORE_PORT node dist/index.js'"
+    local alias_line="alias exocore='cd $WORKDIR && PORT=$EXOCORE_PORT EXOCORE_LOCAL=true NODE_ENV=production node dist/index.js'"
     if grep -q "alias exocore=" "$rc" 2>/dev/null; then
         sed -i "s|alias exocore=.*|$alias_line|" "$rc"
     else
@@ -248,6 +248,7 @@ start_server() {
     hr
     export PORT="$EXOCORE_PORT"
     export NODE_ENV=production
+    export EXOCORE_LOCAL=true
     exec node dist/index.js
 }
 
@@ -279,6 +280,7 @@ doctor() {
         || warn "node-pty native binary missing (run: bash termux.sh fix-pty)"
     log "GYP_DEFINES: ${GYP_DEFINES:-<unset>}"
     log "PYTHON     : ${PYTHON:-<unset>}"
+    log "EXOCORE_LOCAL: ${EXOCORE_LOCAL:-<unset>}"
     hr
 }
 

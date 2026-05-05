@@ -10,7 +10,7 @@
 # ════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
-EXOCORE_DIR="${EXOCORE_DIR:-$HOME/.exocore}"
+EXOCORE_DIR="${EXOCORE_DIR:-$HOME/exocore}"
 EXOCORE_PORT="${PORT:-5000}"
 NODE_MIN=18
 REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web}"
@@ -174,6 +174,8 @@ cd "$EXOCORE_DIR"
 export PORT="${EXOCORE_PORT}"
 export NODE_ENV=production
 export PUPPETEER_SKIP_DOWNLOAD=1
+export EXOCORE_LOCAL=true
+touch "$EXOCORE_DIR/.exocore-local"
 exec node dist/index.js "\$@"
 EOF
     chmod +x "$bin"

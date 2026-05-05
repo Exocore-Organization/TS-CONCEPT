@@ -18,7 +18,7 @@ $($C.C)$($C.B)  █████╗   ╚███╔╝ ██║   ██║█
 $($C.C)$($C.B)  ██╔══╝   ██╔██╗ ██║   ██║██║      ██║   ██║██╔══██╗██╔══╝  $($C.R)
 $($C.C)$($C.B)  ███████╗██╔╝ ██╗╚██████╔╝╚██████╗ ╚██████╔╝██║  ██║███████╗$($C.R)
 $($C.C)$($C.B)  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝$($C.R)
-$($C.B)  Browser-based IDE  •  Installer$($C.R)
+$($C.B)  Browser-based IDE  •  Windows Installer$($C.R)
 "@
 }
 
@@ -42,12 +42,12 @@ function Check-Git  { if (-not (Ensure-Cmd git "Git.Git")) { return $false }; Ok
 
 function Fetch-Repo {
     $MaxRetries = 3
-    $RetryDelay = 3 # seconds
+    $RetryDelay = 3
 
     if (Test-Path (Join-Path $TargetDir ".git")) {
         Log "Updating at $TargetDir..."
         Push-Location $TargetDir
-        
+
         $Attempt = 0
         $Success = $false
         while (-not $Success -and $Attempt -lt $MaxRetries) {
@@ -64,7 +64,7 @@ function Fetch-Repo {
         if (-not $Success) { Err "Pull failed after multiple attempts"; return $false }
     } else {
         Log "Cloning to $TargetDir..."
-        
+
         $Attempt = 0
         $Success = $false
         while (-not $Success -and $Attempt -lt $MaxRetries) {
@@ -79,7 +79,7 @@ function Fetch-Repo {
         }
         if (-not $Success) { Err "Clone failed after multiple attempts"; return $false }
     }
-    
+
     Ok "Source ready at $TargetDir"; return $true
 }
 
@@ -94,9 +94,11 @@ function Install-Deps {
 }
 
 function Start-Server {
-    Log "Starting Exocore with npm start..."
-    Write-Host "`n  ${C.G}Server starting...${C.R}`n"
-    $env:PUPPETEER_SKIP_DOWNLOAD="1"
+    Log "Starting Exocore..."
+    Write-Host "`n  $($C.G)Server starting...$($C.R)`n"
+    $env:PUPPETEER_SKIP_DOWNLOAD = "1"
+    $env:EXOCORE_LOCAL = "true"
+    $env:NODE_ENV = "production"
     Set-Location $TargetDir
     npm start
 }
@@ -104,9 +106,10 @@ function Start-Server {
 function Show-Doctor {
     Write-Host ""; Log "TARGET_DIR: $TargetDir"
     if (Get-Command node -ErrorAction SilentlyContinue) { Log "node: $(node -v)" } else { Warn "node not found" }
-    if (Get-Command npm -ErrorAction SilentlyContinue) { Log "npm: $(npm -v)" } else { Warn "npm not found" }
-    if (Get-Command git -ErrorAction SilentlyContinue) { Log "git: $(git --version)" } else { Warn "git not found" }
+    if (Get-Command npm  -ErrorAction SilentlyContinue) { Log "npm: $(npm -v)"   } else { Warn "npm not found"  }
+    if (Get-Command git  -ErrorAction SilentlyContinue) { Log "git: $(git --version)" } else { Warn "git not found" }
     if (Test-Path (Join-Path $TargetDir "package.json")) { Ok "package.json found" } else { Warn "package.json missing" }
+    if ($env:EXOCORE_LOCAL -eq "true") { Ok "EXOCORE_LOCAL=true (dev-gate bypassed)" } else { Warn "EXOCORE_LOCAL not set" }
     Write-Host ""
 }
 
