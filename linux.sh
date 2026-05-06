@@ -85,24 +85,13 @@ check_git() {
 
 # ── clone or update ──────────────────────────────────────────────────────────
 fetch_repo() {
-    mkdir -p "$EXOCORE_DIR"
-    cd "$EXOCORE_DIR"
-
-    if [[ -d ".git" ]]; then
+    if [[ -d "$EXOCORE_DIR/.git" ]]; then
         info "Updating existing installation at $EXOCORE_DIR..."
-        git pull --ff-only origin "$BRANCH"
+        git -C "$EXOCORE_DIR" pull origin "$BRANCH"
     else
-        info "Cloning exocore-web..."
-        git clone "$REPO_URL"
-        
-        info "Moving files from exocore-web to $EXOCORE_DIR..."
-        # Gamitin ang dotglob para masama sa move yung mga hidden files tulad ng .git at .gitignore
-        shopt -s dotglob
-        mv exocore-web/* .
-        shopt -u dotglob
-        
-        info "Deleting empty exocore-web folder..."
-        rm -rf exocore-web
+        info "Cloning repo straight into $EXOCORE_DIR (renaming from exocore-web)..."
+        # Directly clones the repo contents and renames the folder to "exocore"
+        git clone --branch "$BRANCH" "$REPO_URL" "$EXOCORE_DIR"
     fi
     ok "Source at $EXOCORE_DIR"
 }
