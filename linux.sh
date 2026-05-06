@@ -13,7 +13,7 @@ set -euo pipefail
 EXOCORE_DIR="${EXOCORE_DIR:-$HOME/exocore}"
 EXOCORE_PORT="${PORT:-5000}"
 NODE_MIN=18
-REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web}"
+REPO_URL="${REPO_URL:-https://github.com/Exocore-Organization/exocore-web.git}"
 BRANCH="${BRANCH:-main}"
 
 # Disable git credential prompts — fail immediately if repo is inaccessible
@@ -85,12 +85,24 @@ check_git() {
 
 # ── clone or update ──────────────────────────────────────────────────────────
 fetch_repo() {
-    if [[ -d "$EXOCORE_DIR/.git" ]]; then
+    mkdir -p "$EXOCORE_DIR"
+    cd "$EXOCORE_DIR"
+
+    if [[ -d ".git" ]]; then
         info "Updating existing installation at $EXOCORE_DIR..."
-        git -C "$EXOCORE_DIR" pull --ff-only origin "$BRANCH"
+        git pull --ff-only origin "$BRANCH"
     else
-        info "Cloning Exocore to $EXOCORE_DIR..."
-        git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$EXOCORE_DIR"
+        info "Cloning exocore-web..."
+        git clone "$REPO_URL"
+        
+        info "Moving files from exocore-web to $EXOCORE_DIR..."
+        # Gamitin ang dotglob para masama sa move yung mga hidden files tulad ng .git at .gitignore
+        shopt -s dotglob
+        mv exocore-web/* .
+        shopt -u dotglob
+        
+        info "Deleting empty exocore-web folder..."
+        rm -rf exocore-web
     fi
     ok "Source at $EXOCORE_DIR"
 }
