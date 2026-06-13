@@ -4,7 +4,9 @@ description: "Core TypeScript philosophy — no `any`, no `var`, no legacy patte
 trigger: /ts-philosophy
 ---
 
-# TypeScript Philosophy (2026)
+# /ts-philosophy
+
+Core TypeScript philosophy — no `any`, no `var`, no legacy patterns.
 
 ## Core Principles
 

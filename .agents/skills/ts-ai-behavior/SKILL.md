@@ -4,7 +4,9 @@ description: "AI agent behavior rules for TypeScript code. REJECT any/var/as. RE
 trigger: /ts-ai-behavior
 ---
 
-# AI Agent Behavior (2026)
+# /ts-ai-behavior
+
+AI agent rules for writing and reviewing TypeScript code.
 
 When writing code or reviewing PRs as an AI agent:
 

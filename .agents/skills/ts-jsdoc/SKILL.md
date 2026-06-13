@@ -4,7 +4,9 @@ description: "JSDoc standards for TypeScript. Every export must have `@param`, `
 trigger: /ts-jsdoc
 ---
 
-# JSDoc Standards (2026)
+# /ts-jsdoc
+
+JSDoc standards — `@param`, `@returns`, `@throws`, `@example` on every export.
 
 Every exported declaration **must** have a JSDoc block.
 

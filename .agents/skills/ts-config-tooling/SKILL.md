@@ -4,7 +4,9 @@ description: "TypeScript configuration and tooling: `tsconfig.json` with `esnext
 trigger: /ts-config-tooling
 ---
 
-# TypeScript Config & Tooling (2026)
+# /ts-config-tooling
+
+TypeScript config, tooling, and project structure.
 
 ## Configuration
 

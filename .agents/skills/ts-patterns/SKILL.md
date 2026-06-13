@@ -4,7 +4,9 @@ description: "TypeScript code patterns: branded types, discriminated unions, `sa
 trigger: /ts-patterns
 ---
 
-# TypeScript Code Patterns (2026)
+# /ts-patterns
+
+TypeScript code patterns: branded types, discriminated unions, `satisfies`, `as const`, `using`.
 
 ### Prefer `unknown` over `any`
 ```typescript
