@@ -24,10 +24,6 @@ npm run typecheck  # tsc --noEmit
 
 See [SKILLS.md](./SKILLS.md) for the full coding guide — rules for TypeScript, JSDoc, and project conventions that both humans and AI agents follow.
 
-## MCP Support
-
-MCP server at `mcp/server.ts` provides `ts_typecheck`, `ts_read_skill`, `ts_list_skills` tools. Compatible with Claude, AGY, Antigravity, OpenCode, Codex, Exocode, Hermes, Gemini — any MCP-compatible agent.
-
 ## Philosophy
 
 - **No `any`** — every type is known at compile time.

@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "ts-helpers": {
-      "command": "npx",
-      "args": ["tsx", "mcp/server.ts"]
-    }
-  }
-}
