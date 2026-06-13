@@ -26,7 +26,7 @@ See [SKILLS.md](./SKILLS.md) for the full coding guide — rules for TypeScript,
 
 ## MCP Support
 
-MCP server at `mcp/server.ts` provides `ts_typecheck`, `ts_read_skill`, `ts_list_skills` tools. Compatible with OpenCode, Gemini, Codex, Exocode, Hermes.
+MCP server at `mcp/server.ts` provides `ts_typecheck`, `ts_read_skill`, `ts_list_skills` tools. Compatible with Claude, AGY, Antigravity, OpenCode, Codex, Exocode, Hermes, Gemini — any MCP-compatible agent.
 
 ## Philosophy
 
