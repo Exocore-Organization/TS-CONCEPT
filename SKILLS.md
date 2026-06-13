@@ -9,3 +9,4 @@ Use `/ts-<name>` to load a skill:
 | `/ts-jsdocs` | JSDoc standards: `@param`, `@returns`, `@throws`, `@example` on every export. |
 | `/ts-config-tooling` | `tsconfig.json`, `tsx`, `tsc --noEmit`, project structure. |
 | `/ts-ai-behavior` | AI agent rules: reject/require/enforce/prefer/verify. |
+| `/ts-all` | Complete standards — philosophy, patterns, JSDoc, config, tooling, AI behavior. Load this once. |
