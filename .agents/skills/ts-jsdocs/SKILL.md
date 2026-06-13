@@ -1,10 +1,10 @@
 ---
 name: ts-jsdoc
 description: "JSDoc standards for TypeScript. Every export must have `@param`, `@returns`, `@throws`, `@example`. No inline `//` comments explaining what — only why."
-trigger: /ts-jsdoc
+trigger: /ts-jsdocs
 ---
 
-# /ts-jsdoc
+# /ts-jsdocs
 
 JSDoc standards — `@param`, `@returns`, `@throws`, `@example` on every export.
 
