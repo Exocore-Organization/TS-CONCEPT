@@ -50,6 +50,9 @@ These files exist so the platforms can find the MCP server — **you don't need 
 
 | File | Platform |
 |------|----------|
+| `claude.json` | Claude Code |
+| `agy.json` | AGY |
+| `antigravity.json` | Antigravity |
 | `opencode.json` | OpenCode |
 | `.codex/config.toml` | Codex |
 | `exocode.json` | Exocode |
