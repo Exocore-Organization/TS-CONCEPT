@@ -1,0 +1,3 @@
+[mcp.ts-helpers]
+type = "local"
+command = ["npx", "tsx", "mcp/server.ts"]

@@ -1,26 +1,26 @@
 ---
 name: ts-mcp-config
-description: "MCP server configuration for TypeScript tools. Provides ts_typecheck (run tsc), ts_read_skill (read skill docs), ts_list_skills (list all skills). Supports OpenCode, Gemini, Codex, Exocode, Hermes, and any MCP-compatible agent."
+description: "MCP server for TypeScript tools. Provides ts_typecheck (run tsc), ts_read_skill (read skill docs), ts_list_skills. Config files for OpenCode, Codex, Exocode, Hermes, Gemini."
 trigger: /ts-mcp-config
 ---
 
 # /ts-mcp-config
 
-MCP server for TypeScript coding standards — works with any MCP-compatible AI platform.
+MCP server for TypeScript coding standards — works with any MCP-compatible AI.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `ts_typecheck` | Run `tsc --noEmit` on the project. Returns errors/warnings. |
-| `ts_read_skill` | Read a skill file by name (e.g. `ts-philosophy`). |
+| `ts_typecheck` | Run `tsc --noEmit`. Returns errors/warnings. |
+| `ts_read_skill` | Read a skill file by name (`ts-philosophy`, `ts-patterns`, etc). |
 | `ts_list_skills` | List all available skills under `.agents/skills/`. |
 
-## Platform Setup
+## Config Files
 
-### OpenCode
+MCP server: `npx tsx mcp/server.ts` (stdio transport, `@modelcontextprotocol/sdk`)
 
-Add to `opencode.json`:
+### OpenCode — `opencode.json`
 ```json
 {
   "mcp": {
@@ -33,36 +33,52 @@ Add to `opencode.json`:
 }
 ```
 
-Prompt: `use ts_typecheck to validate the code`
-
-### Gemini (gemini-web-mcp / gemcli)
-
-```bash
-gemcli chat "Run ts_typecheck on the project" --mcp ts-helpers
+### Codex — `.codex/config.toml`
+```toml
+[mcp.ts-helpers]
+type = "local"
+command = ["npx", "tsx", "mcp/server.ts"]
 ```
 
-### Codex
-
+### Exocode — `exocode.json`
 ```json
 {
   "mcp": {
     "ts-helpers": {
       "type": "local",
-      "command": ["npx", "tsx", "mcp/server.ts"]
+      "command": ["npx", "tsx", "mcp/server.ts"],
+      "enabled": true
     }
   }
 }
 ```
 
-### Exocode / Hermes / others
+### Hermes — `hermes.json`
+```json
+{
+  "mcp": {
+    "ts-helpers": {
+      "type": "local",
+      "command": ["npx", "tsx", "mcp/server.ts"],
+      "enabled": true
+    }
+  }
+}
+```
 
-Same MCP stdio config pattern — point to `npx tsx mcp/server.ts` and the tools become available.
+### Gemini (gemcli)
+```bash
+gemcli chat "Run ts_typecheck on the project" --mcp ts-helpers
+```
 
 ## Files
 
 ```
+opencode.json           # OpenCode
+.codex/config.toml      # Codex
+exocode.json            # Exocode
+hermes.json             # Hermes
 mcp/
-├── package.json        # dependencies (@modelcontextprotocol/sdk)
-├── server.ts           # MCP server (stdio transport)
-opencode.json           # MCP config (OpenCode)
+├── package.json
+└── server.ts
 ```
